@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Manufactoria</title>
+    <style>
+        td {width: 30px; height: 30px;}
+        .s {background-image:url('pics/s.gif');}
+        .a {background-image:url('pics/a.gif');}
+        .r {background-image:url('pics/r.gif');}
+        .g {background-image:url('pics/g.gif');}
+        .b {background-image:url('pics/b.gif');}
+        .y {background-image:url('pics/y.gif');}
+        .c {background-image:url('pics/c.gif');}
+        .q {background-image:url('pics/br.gif');}
+        .p {background-image:url('pics/yg.gif');}
+        .f0 {}
+        .f1 {transform:rotate(90deg);}
+        .f2 {transform:rotate(180deg);}
+        .f3 {transform:rotate(270deg);}
+        .f4 {transform:rotate(0deg) scaleY(-1);}
+        .f5 {transform:rotate(90deg) scaleY(-1);}
+        .f6 {transform:rotate(180deg) scaleY(-1);}
+        .f7 {transform:rotate(270deg) scaleY(-1);}
+    </style>
+</head>
+<body>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript">
+       $(function(){
+           data = [['qf0','pf1','pf2','pf3','pf4','pf5','pf6','pf7'],['cf3','cf0']]
+           table = $("<table></table>")
+           $('body').append(table);
+           $.each(data, function(index, line){
+               container = $("<tr></tr>");
+               console.log(line);
+               $.each(line, function(index, content){
+                   identifier = content.substr(0,1);
+                   modifier = content.substr(1);
+                   container.append($("<td class='"+identifier+" "+modifier+"'>.</td>"));
+               });
+               table.append(container);
+           });
+
+       });
+    </script>
+</body>
+</html>
