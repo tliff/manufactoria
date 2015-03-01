@@ -10,8 +10,8 @@
         .b {background-image:url('pics/b.gif');}
         .y {background-image:url('pics/y.gif');}
         .c {background-image:url('pics/c.gif');}
-        .q {background-image:url('pics/br.gif');}
-        .p {background-image:url('pics/yg.gif');}
+        .p {background-image:url('pics/br.gif');}
+        .q {background-image:url('pics/yg.gif');}
         .f0 {}
         .f1 {transform:rotate(90deg);}
         .f2 {transform:rotate(180deg);}
@@ -23,24 +23,46 @@
     </style>
 </head>
 <body>
+    
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript">
+     
        $(function(){
-           data = [['qf0','pf1','pf2','pf3','pf4','pf5','pf6','pf7'],['cf3','cf0']]
-           table = $("<table></table>")
-           $('body').append(table);
-           $.each(data, function(index, line){
-               container = $("<tr></tr>");
-               console.log(line);
-               $.each(line, function(index, content){
-                   identifier = content.substr(0,1);
-                   modifier = content.substr(1);
-                   container.append($("<td class='"+identifier+" "+modifier+"'>.</td>"));
+           console.log("setup");
+           $('#theform').bind('submit', function(event){
+               console.log( $(event.delegateTarget).find('input')[0].value);
+               var data;
+               try{
+                   data = JSON.parse( $(event.delegateTarget).find('input')[0].value);
+               }
+               catch (e) {
+                   return false;
+               }
+               console.log(data);
+               table = $("<table id='thegrid'></table>")
+               $('#thegrid').remove();
+               $('body').append(table);
+               $.each(data, function(index, line){
+                   container = $("<tr></tr>");
+                   console.log(line);
+                   $.each(line, function(index, content){
+                       identifier = content.substr(0,1);
+                       modifier = content.substr(1);
+                       container.append($("<td class='"+identifier+" "+modifier+"'> </td>"));
+                   });
+                   table.append(container);
                });
-               table.append(container);
-           });
-
+               return false;
+           });           
        });
+       function render(data){
+           
+
+       };
+
     </script>
+    <form id="theform"  >
+        <input type="text">
+    </form>
 </body>
 </html>

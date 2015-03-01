@@ -1,6 +1,9 @@
+require_relative './node.rb'
+require_relative './grid.rb'
+
 class Machine
 
-  END_STATES = [:accept, :reject, :doesntotterminate]
+  END_STATES = [:accept, :reject, :doesnotterminate]
 
   def initialize tape, &program
     @tape = tape
@@ -8,7 +11,6 @@ class Machine
     @current_state = :start
     @past_states = {}
     self.instance_eval &program
-    pp @states
   end
   
   def run(debug=false)
@@ -47,4 +49,12 @@ class Machine
     end
     @states[name] = new_node
   end
+  
+  def layout width, height
+    grid = Grid.new(width, height, @states)
+    grid.layout
+    grid
+  end
+  
+  
 end
